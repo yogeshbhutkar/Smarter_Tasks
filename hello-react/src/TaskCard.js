@@ -1,12 +1,12 @@
 import "./TaskCard.css";
 
-const TaskCard = ({ title, dueDate, asignee, completedOn }) => {
+const TaskCard = ({ title, dueDate, assigneeName, completedAtDate }) => {
   return (
     <div className="TaskItem">
       <h2 className="text-xl font-bold">{title}</h2>
-      {completedOn && <p>Completed On: {completedOn}</p>}
+      {completedAtDate && <p>Completed On: {completedAtDate}</p>}
       {dueDate && <p>Due On: {dueDate}</p>}
-      {asignee && <p>Assignee: {asignee}</p>}
+      {assigneeName && <p>Assignee: {assigneeName}</p>}
     </div>
   );
 };
