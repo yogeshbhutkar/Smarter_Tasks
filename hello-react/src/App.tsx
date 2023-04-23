@@ -8,7 +8,7 @@ function App() {
         <div>
           <h1 className="font-bold text-2xl">Smarter Tasks</h1>
           <p>
-            <span className="font-bold">Project</span>: Graduation Final Year
+            <span className="font-bold">Project:</span> Graduation Final Year
             Project (Revamp College Website)
           </p>
         </div>
