@@ -16,12 +16,12 @@ function App() {
           <div className="mr-5 rounded-lg px-2 border-2">
             <h1 className="font-bold pb-2 ">Pending</h1>
             <TaskCard
-              title="Build the website with static content"
+              title="Build The Website With Static Content"
               dueDate="10th April"
               assigneeName="Rohit S"
             />
             <TaskCard
-              title="Add blog"
+              title="Add a blog"
               dueDate="22nd March"
               assigneeName="Rohit M"
             />
@@ -37,9 +37,9 @@ function App() {
               assigneeName="Rohit M"
             />
             <TaskCard
-              title="Get approval from principal"
-              assigneeName="Ajay S"
+              title="Get the approval from principal"
               completedAtDate="20th April"
+              assigneeName="Ajay S"
             />
           </div>
         </div>
