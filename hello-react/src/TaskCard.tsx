@@ -13,7 +13,7 @@ const TaskCard = (props: TaskCardInterface) => {
     <div className="TaskItem">
       <h2 className="text-xl font-bold">{props.title}</h2>
       {props.dueDate && <p>Due On: {props.dueDate}</p>}
-      {props.completedAtDate && <p>Completed On: {props.completedAtDate}</p>}
+      {props.completedAtDate && <p>Completed on: {props.completedAtDate}</p>}
       <p>Assignee: {props.assigneeName}</p>
     </div>
   );
