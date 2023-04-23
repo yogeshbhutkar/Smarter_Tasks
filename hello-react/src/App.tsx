@@ -1,3 +1,4 @@
+import React from "react";
 import TaskCard from "./TaskCard";
 
 function App() {
@@ -33,11 +34,11 @@ function App() {
             <TaskCard
               title="Design the mockup"
               completedAtDate={`10th April`}
-              asignee={`Rohit M`}
+              assigneeName={`Rohit M`}
             />
             <TaskCard
               title="Get approval from principal"
-              asignee={`Ajay S`}
+              assigneeName={`Ajay S`}
               completedAtDate={`20th April`}
             />
           </div>
