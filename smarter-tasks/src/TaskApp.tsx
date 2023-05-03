@@ -9,11 +9,13 @@ interface TaskAppState {
 }
 class TaskApp extends React.Component<TaskAppProp, TaskAppState> {
   addTask = (task: TaskItem) => {
-    this.setState((state, props) => {
-      return {
-        tasks: [...state.tasks, task],
-      };
-    });
+    if (task.title && task.dueDate) {
+      this.setState((state, props) => {
+        return {
+          tasks: [...state.tasks, task],
+        };
+      });
+    }
   };
 
   constructor(props: TaskAppProp) {
