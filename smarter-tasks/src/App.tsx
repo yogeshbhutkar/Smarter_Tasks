@@ -1,14 +1,11 @@
-import './App.css';
-import TaskForm from "./TaskForm";
-import TaskList from "./TaskList";
+import "./App.css";
+import TaskApp from "./TaskApp";
 
 function App() {
   return (
     <div className="App">
-      <TaskForm />
-      <TaskList />
+      <TaskApp />
     </div>
   );
 }
-
 export default App;
