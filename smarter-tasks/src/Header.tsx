@@ -14,7 +14,7 @@ const Header = () => {
             </Link>
           </div>
           <div className="flex items-center w-1/3 justify-center">
-            <p className="text-white text-lg font-bold">Task Manager</p>
+            <span className="text-white text-lg font-bold">Task Manager</span>
           </div>
           <div className="flex items-center w-1/3 justify-end">
             <Link to="/signin" className="ml-6 text-gray-300 hover:text-white">
