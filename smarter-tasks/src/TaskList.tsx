@@ -9,7 +9,7 @@ const TaskList = (props: {
   deleteTaskCB: (id: Number) => void;
 }) => {
   const list = props.tasks.map((task, idx) => (
-    <li key={idx}>
+    <li key={idx} className="mx-10 mt-2">
       <Task
         id={task.id}
         title={task.title}
