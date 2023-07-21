@@ -14,12 +14,12 @@ const Dashboard: React.FC = () => {
         Dashboard
       </h1>
       <button
+        id="logout-link"
         onClick={() => {
           localStorage.removeItem("userData");
           localStorage.removeItem("authToken");
           navigate("/signin");
         }}
-        id="logout-link"
       >
         Signout
       </button>
