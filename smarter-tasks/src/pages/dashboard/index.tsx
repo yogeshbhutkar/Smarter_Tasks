@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 const Dashboard: React.FC = () => {
   const ref = localStorage.getItem("userData");
   const userData = ref ? JSON.parse(ref) : {};
-
+  console.log(userData.email);
+  console.log(userData.name);
   const navigate = useNavigate();
 
   return (
