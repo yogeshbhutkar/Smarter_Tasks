@@ -44,7 +44,7 @@ const SigninForm: React.FC = () => {
         <input
           type="Email"
           name="Email"
-          id="Email"
+          id="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="w-full border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
