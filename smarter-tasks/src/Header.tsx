@@ -18,7 +18,7 @@ const Header = () => {
           </div>
           <div className="flex items-center w-1/3 justify-end">
             <Link
-              id="logout-link"
+              id="signout"
               to="/signin"
               onClick={() => {
                 localStorage.removeItem("userData");
