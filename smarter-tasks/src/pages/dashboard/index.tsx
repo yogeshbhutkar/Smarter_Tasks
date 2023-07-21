@@ -18,6 +18,7 @@ const Dashboard: React.FC = () => {
         onClick={() => {
           localStorage.removeItem("userData");
           localStorage.removeItem("authToken");
+          navigate("/signin");
         }}
       >
         Signout

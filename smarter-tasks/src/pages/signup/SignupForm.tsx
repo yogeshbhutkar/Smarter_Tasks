@@ -28,6 +28,10 @@ const SignupForm: React.FC = () => {
         throw new Error("Sign-up failed");
       }
       console.log("Sign-up successful");
+      const res = await response.json();
+      localStorage.setItem("authToken", res.token);
+      localStorage.setItem("userData", JSON.stringify(res.user));
+      navigate("/dashboard");
     } catch (error) {
       console.error("Sign-up failed:", error);
     }
