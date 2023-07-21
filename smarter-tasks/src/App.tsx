@@ -19,18 +19,17 @@ function App() {
       {location.pathname !== "/signin" && location.pathname !== "/notfound" && (
         <Header />
       )}
-      {/* <Form /> */}
       <Routes>
         <Route path="/" element={<ProtectedRoute element={<HomePage />} />} />
         <Route
           path="/tasks"
           element={<ProtectedRoute element={<TaskApp />} />}
         />
-        <Route path="/signup" element={<Signup />} />
         <Route
           path="/tasks/:id"
           element={<ProtectedRoute element={<TaskDetailsPage />} />}
         />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/notfound" element={<NotFound />} />
 
