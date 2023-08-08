@@ -3,6 +3,7 @@ import { Fragment, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useProjectsDispatch } from "../../context/projects/context";
 import { addUser } from "../../context/members/actions";
+import { useUsersDispatch, useUsersState } from "../../context/members/context";
 
 type Inputs = {
   name: string;
@@ -12,8 +13,10 @@ type Inputs = {
 
 const NewMember = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [error, setError] = useState(null);
-  const dispatchProjects = useProjectsDispatch();
+  const [error, setError] = useState(false);
+
+  const dispatchUsers = useUsersDispatch();
+
   const {
     register,
     handleSubmit,
@@ -26,18 +29,20 @@ const NewMember = () => {
     setIsOpen(true);
   };
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const { name } = data;
-    const response = await addUser(dispatchProjects, { name });
+    const { name, email, password } = data;
+    console.log(name + "name");
+    const response = await addUser(dispatchUsers, { name, email, password });
     if (response.ok) {
       setIsOpen(false);
     } else {
-      setError(response.error as React.SetStateAction<null>);
+      setError(true);
     }
   };
   return (
     <>
       <button
         type="button"
+        id="new-member-btn"
         onClick={openModal}
         className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
       >
@@ -72,13 +77,14 @@ const NewMember = () => {
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
-                    Create new user
+                    New User
                   </Dialog.Title>
                   <div className="mt-2">
                     <form onSubmit={handleSubmit(onSubmit)}>
-                      {error && <span>{error}</span>}
+                      {error && <span>Failed to create member</span>}
                       <input
                         type="text"
+                        id="name"
                         placeholder="Enter user name..."
                         autoFocus
                         {...register("name", { required: true })}
@@ -86,15 +92,37 @@ const NewMember = () => {
                           errors.name ? "border-red-500" : ""
                         }`}
                       />
-                      {errors.name && <span>This field is required</span>}
+                      {errors.name && <span>Name is required</span>}
+                      <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter user email..."
+                        autoFocus
+                        {...register("email", { required: true })}
+                        className={`w-full border rounded-md py-2 px-3 my-4 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue ${
+                          errors.email ? "border-red-500" : ""
+                        }`}
+                      />
+                      {errors.email && <span>Email is required</span>}
+                      <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter user password..."
+                        autoFocus
+                        {...register("password", { required: true })}
+                        className={`w-full border rounded-md py-2 px-3 my-4 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue ${
+                          errors.password ? "border-red-500" : ""
+                        }`}
+                      />
+                      {errors.password && <span>Password is required</span>}
                       <button
+                        id="create-member-btn"
                         type="submit"
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 mr-2 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       >
                         Submit
                       </button>
                       <button
-                        type="submit"
                         onClick={closeModal}
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       >

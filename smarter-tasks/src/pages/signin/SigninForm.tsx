@@ -1,16 +1,24 @@
-import React, { useState } from "react";
-// Dialogue 1: First we will import the API_ENDPOINT constant from the `config` folder
+import React from "react";
 import { VITE_API_ENDPOINT } from "../../config/constants";
 import { useNavigate } from "react-router-dom";
+import { useForm, SubmitHandler } from "react-hook-form";
+
+type formFields = {
+  email: string;
+  password: string;
+};
 
 const SigninForm: React.FC = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  // Dialogue 2: Then we will define the handle submit function
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<formFields>();
+
+  const onSubmit: SubmitHandler<formFields> = async (data) => {
+    const { email, password } = data;
 
     try {
       const response = await fetch(`${VITE_API_ENDPOINT}/users/sign_in`, {
@@ -18,7 +26,6 @@ const SigninForm: React.FC = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-      // extract the response body as JSON data
       const data = await response.json();
 
       if (!response.ok) {
@@ -26,8 +33,6 @@ const SigninForm: React.FC = () => {
       }
 
       console.log("Sign-in successful");
-
-      // Dialogue: After successful signin, first we will save the token in localStorage
       localStorage.setItem("authToken", data.token);
       localStorage.setItem("userData", JSON.stringify(data.user));
       navigate("/account");
@@ -36,17 +41,14 @@ const SigninForm: React.FC = () => {
     }
   };
 
-  // Dialogue: Then we will use the handleSubmit function with our form
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div>
         <label className="block text-gray-700 font-semibold mb-2">Email:</label>
         <input
           type="Email"
-          name="Email"
           id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          {...register("email", { required: true })}
           className="w-full border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
         />
       </div>
@@ -56,10 +58,8 @@ const SigninForm: React.FC = () => {
         </label>
         <input
           type="password"
-          name="password"
           id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          {...register("password", { required: true })}
           className="w-full border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
         />
       </div>

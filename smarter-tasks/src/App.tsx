@@ -6,6 +6,7 @@ import { ThemeContext } from "./context/theme";
 // To do that, first I'll import the `ProjectsProvider` in the `App` component.
 
 import { ProjectsProvider } from "./context/projects/context";
+import { UsersProvider } from "./context/members/context";
 
 // Then I'll wrap the RouterProvider component with the <ProjectsProvider> component.
 const App = () => {
@@ -16,9 +17,11 @@ const App = () => {
         theme === "dark" ? "dark" : ""
       }`}
     >
-      <ProjectsProvider>
-        <RouterProvider router={router} />
-      </ProjectsProvider>
+      <UsersProvider>
+        <ProjectsProvider>
+          <RouterProvider router={router} />
+        </ProjectsProvider>
+      </UsersProvider>
     </div>
   );
 };
