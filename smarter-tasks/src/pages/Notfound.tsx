@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-export default function NotFound() {
+export default function Notfound() {
   const redirect = useNavigate();
   return (
     <div className="flex items-center justify-center">
