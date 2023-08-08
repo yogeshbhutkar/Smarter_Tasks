@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useReducer } from "react";
 import { UsersActions, UsersState, initialState, reducer } from "./reducer";
 
-const UsersStateContext = createContext<UsersState | undefined>(undefined);
+const UsersStateContext = createContext<UsersState>(initialState);
 
 type UsersDispatch = React.Dispatch<UsersActions>;
 
