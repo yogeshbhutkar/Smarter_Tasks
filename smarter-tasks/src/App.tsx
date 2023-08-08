@@ -1,46 +1,25 @@
-import { Routes, Route, useLocation, Navigate } from "react-router-dom";
-// import Form from "./Form";
+import { useContext } from "react";
+import { RouterProvider } from "react-router-dom";
+import router from "./routes";
+import { ThemeContext } from "./context/theme";
 
-import Header from "./Header";
-import HomePage from "./HomePage";
-import TaskApp from "./TaskApp";
-import TaskDetailsPage from "./TaskDetailsPage";
-import { ProtectedRoute } from "./ProtectedRoute";
-import NotFound from "./NotFound";
-import Signup from "./pages/signup";
-import Signin from "./pages/signin";
-import Dashboard from "./pages/dashboard";
+// To do that, first I'll import the `ProjectsProvider` in the `App` component.
 
-function App() {
-  const location = useLocation();
+import { ProjectsProvider } from "./context/projects/context";
 
+// Then I'll wrap the RouterProvider component with the <ProjectsProvider> component.
+const App = () => {
+  const { theme } = useContext(ThemeContext);
   return (
-    <div>
-      {location.pathname !== "/signin" && location.pathname !== "/notfound" && (
-        <Header />
-      )}
-      <Routes>
-        <Route path="/" element={<ProtectedRoute element={<HomePage />} />} />
-        <Route
-          path="/tasks"
-          element={<ProtectedRoute element={<TaskApp />} />}
-        />
-        <Route
-          path="/tasks/:id"
-          element={<ProtectedRoute element={<TaskDetailsPage />} />}
-        />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/notfound" element={<NotFound />} />
-
-        <Route
-          path="/dashboard"
-          element={<ProtectedRoute element={<Dashboard />} />}
-        />
-        <Route path="*" element={<Navigate to="/notfound" />} />
-      </Routes>
+    <div
+      className={`h-screen w-full mx-auto py-2 ${
+        theme === "dark" ? "dark" : ""
+      }`}
+    >
+      <ProjectsProvider>
+        <RouterProvider router={router} />
+      </ProjectsProvider>
     </div>
   );
-}
-
+};
 export default App;
