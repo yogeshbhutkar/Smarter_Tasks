@@ -2,8 +2,8 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useProjectsDispatch } from "../../context/projects/context";
-import { addUser } from "../../context/members/actions";
-import { useUsersDispatch, useUsersState } from "../../context/members/context";
+import { addMember } from "../../context/members/actions";
+import { useMembersDispatch, useMembersState } from "../../context/members/context";
 
 type Inputs = {
   name: string;
@@ -15,7 +15,7 @@ const NewMember = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState(false);
 
-  const dispatchUsers = useUsersDispatch();
+  const dispatchUsers = useMembersDispatch();
 
   const {
     register,
@@ -31,7 +31,7 @@ const NewMember = () => {
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const { name, email, password } = data;
     console.log(name + "name");
-    const response = await addUser(dispatchUsers, { name, email, password });
+    const response = await addMember(dispatchUsers, { name, email, password });
     if (response.ok) {
       setIsOpen(false);
     } else {

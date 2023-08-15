@@ -1,62 +1,56 @@
-export interface User {
+interface Member {
   id: number;
   name: string;
-  email: string;
-  organsation_id: number;
+  email:string;
 }
 
-export interface UsersState {
-  users: User[];
+export interface MembersState {
+  members: Member[];
   isLoading: boolean;
   isError: boolean;
   errorMessage: string;
 }
-
-export type UsersActions =
-  | { type: "FETCH_USERS_REQUEST" }
-  | { type: "FETCH_USERS_SUCCESS"; payload: User[] }
-  | { type: "FETCH_USERS_FAILURE"; payload: string }
-  | { type: "ADD_USER_SUCCESS"; payload: User }
-  | { type: "DELETE_USER_SUCCESS"; payload: number };
-
-export const initialState: UsersState = {
-  users: [],
+export type MembersActions = 
+| { type: 'FETCH_MEMBERS_REQUEST' }
+| { type: 'FETCH_MEMBERS_SUCCESS'; payload: Member[] }
+| { type: 'FETCH_MEMBERS_FAILURE'; payload: string }
+| { type: 'ADD_MEMBER_SUCCESS'; payload: Member }
+|{ type: "DELETE_MEMBER_SUCCESS"; payload: number };
+export const initialState: MembersState = {
+  members: [],
   isLoading: false,
   isError: false,
-  errorMessage: "",
+  errorMessage: ''
 };
 
-export const reducer = (
-  state: UsersState = initialState,
-  action: UsersActions
-): UsersState => {
-  switch (action.type) {
-    case "FETCH_USERS_REQUEST":
+export const reducer = (state: MembersState = initialState, action: MembersActions): MembersState => {
+switch (action.type) {
+  case "FETCH_MEMBERS_REQUEST":
+    return {
+      ...state,
+      isLoading: true
+    };   
+  case "FETCH_MEMBERS_SUCCESS":
+    return {
+      ...state,
+      isLoading: false,
+      members: action.payload,
+    };      
+  case "FETCH_MEMBERS_FAILURE":
+    return {
+      ...state,
+      isLoading: false,
+      isError: true, 
+      errorMessage: action.payload
+    };
+    case "DELETE_MEMBER_SUCCESS":
       return {
         ...state,
-        isLoading: true,
+        members: state.members.filter((member) => member.id !== action.payload),
       };
-    case "FETCH_USERS_SUCCESS":
-      return {
-        ...state,
-        isLoading: false,
-        users: action.payload,
-      };
-    case "FETCH_USERS_FAILURE":
-      return {
-        ...state,
-        isLoading: false,
-        isError: true,
-        errorMessage: action.payload,
-      };
-    case "ADD_USER_SUCCESS":
-      return { ...state, users: [...state.users, action.payload] };
-    case "DELETE_USER_SUCCESS":
-      return {
-        ...state,
-        users: state.users.filter((user) => user.id !== action.payload),
-      };
-    default:
-      return state;
-  }
-};
+    case 'ADD_MEMBER_SUCCESS':
+    return { ...state, members: [...state.members, action.payload] };            
+  default:
+    return state;
+}
+}
