@@ -4,7 +4,7 @@ interface ErrorBoundaryState {
   hasError: boolean;
 }
 
-class ErrorBoundary extends Component<{}, ErrorBoundaryState> {
+class ErrorBoundary extends Component<{children?:ReactNode}, ErrorBoundaryState> {
   constructor(props: {}) {
     super(props);
     this.state = { hasError: false };
